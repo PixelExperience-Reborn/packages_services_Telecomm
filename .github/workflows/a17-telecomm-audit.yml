@@ -1,0 +1,20 @@
+name: AOSP17 P1 Telecomm historical source audit
+
+on:
+  push:
+    branches:
+      - audit/a17-mondrian-telecomm-20261104
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  legacy-telecom-inventory:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inventory historical Telecom security patches and Soong graph
+        run: python3 tools/verify_a17_telecomm_legacy.py
